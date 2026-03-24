@@ -72,69 +72,60 @@ $(document).ready(function () {//시작
     }
   });
 
-function updateGuideMode() {
-  if (window.innerWidth <= 420) {
-    isSnapped = false;
-    guide.allowTouchMove = false;
-  } else {
-    guide.allowTouchMove = true;
-  }
-}
-
-updateGuideMode();
-window.addEventListener('resize', updateGuideMode);
-
-function handleWheel(e) {
-  if (window.innerWidth <= 420) return;
-  if (!isSnapped) return;
-
-  const delta = e.deltaY;
-
-  if (isAnimating) {
-    e.preventDefault();
-    return;
-  }
-
-  if (delta > 0) {
-    if (!guide.isEnd) {
-      e.preventDefault();
-      isAnimating = true;
-      guide.slideNext();
-    } else {
-      isSnapped = false;
-      isLeaving = true;
-      window.scrollBy({
-        top: window.innerHeight,
-        behavior: "smooth"
-      });
-      setTimeout(() => {
-        isLeaving = false;
-      }, 600);
+  // 휠 이벤트 제어
+  window.addEventListener('wheel', function (e) {
+    if (window.innerWidth <= 420) {
     }
-  } else {
-    if (!guide.isBeginning) {
-      e.preventDefault();
-      isAnimating = true;
-      guide.slidePrev();
-    } else {
-      isSnapped = false;
-      isLeaving = true;
-      window.scrollBy({
-        top: -window.innerHeight,
-        behavior: "smooth"
-      });
-      setTimeout(() => {
-        isLeaving = false;
-      }, 600);
+
+
+    if (!isSnapped) return; // 스냅 상태 아닐 경우 무시
+    const delta = e.deltaY; // 마우스 휠이 세로 방향으로 얼마나 움직였는지 나타내는 값
+
+    if (isAnimating) {      // 슬라이드 전환 중이면 
+      e.preventDefault(); //휠 이벤트 무시
+      return;
     }
-  }
-}
+    if (delta > 0) { // 아래로 휠
+      if (!guide.isEnd) {
+        e.preventDefault();
+        isAnimating = true;
+        guide.slideNext();
+      } else {
+        // 마지막 슬라이드가 아래 섹션으로 이동
+        isSnapped = false;
+        isLeaving = true;
 
-window.addEventListener('wheel', handleWheel, { passive: false });
+        window.scrollBy({
+          top: window.innerHeight,
+          behavior: "smooth"
+        });
+        setTimeout(() => isLeaving = false, 600);
+      }
+    } else { // 위로 휠
+      if (!guide.isBeginning) {
+        e.preventDefault();
+        isAnimating = true;
+        guide.slidePrev();
+      } else {
+        // 첫 슬라이드가 상위 섹션으로 이동
+        isSnapped = false;
+        isLeaving = true;
 
-guide.on('slideChangeTransitionEnd', function () {
-  isAnimating = false;
-});
+        window.scrollBy({
+          top: -window.innerHeight,
+          behavior: "smooth"
+        });
+        setTimeout(() => isLeaving = false, 600);
+      }
+    }
+  },
+    { passive: false }); //휠 이벤트를 수동으로 처리하기 위해 처리해 주는 옵션     
+
+  guide.on('slideChangeTransitionEnd', function () {
+    isAnimating = false; // 슬라이드 전환 끝나면 애니메이션 상태 해제
+  });
+
+
   
   $("#section06 .car").addClass("active");
   $(".car-site").show();
