@@ -39,13 +39,14 @@ $(document).ready(function () {//시작
   let isAnimating = false; // 슬라이드 애니메이션 중인지
   let isLeaving = false; // 섹션을 벗어나는 중인지 (중복 스냅 방지용)
 
+
   const guide = new Swiper(".guide", {
     direction: "vertical",        // 세로 슬라이드
     speed: 800,                   // 슬라이드 속도
     effect: "fade",               // 페이드 효과
     fadeEffect: { crossFade: true },
     mousewheel: false,            // Swiper 기본 휠 비활성
-    allowTouchMove: true         // 터치 드래그 
+    allowTouchMove: true,      // 터치 드래그 
   });
 
   // 섹션 4로 스크롤 스냅(자석기능)
@@ -63,8 +64,6 @@ $(document).ready(function () {//시작
 
   // 문서 스크롤 시 섹션 중앙에 오면 섹션 4 영역 자동 스냅
   window.addEventListener('scroll', function () {
-    if (window.innerWidth <= 420) {
-    }
     if (isSnapped || isLeaving) return; // 이미 스냅되었거나 이탈 중이면 중단
     const rect = $section[0].getBoundingClientRect();
 
@@ -76,8 +75,8 @@ $(document).ready(function () {//시작
 
   // 휠 이벤트 제어
   window.addEventListener('wheel', function (e) {
-
-
+    if (window.innerWidth <= 420) {
+    }
     if (!isSnapped) return; // 스냅 상태 아닐 경우 무시
     const delta = e.deltaY; // 마우스 휠이 세로 방향으로 얼마나 움직였는지 나타내는 값
 
