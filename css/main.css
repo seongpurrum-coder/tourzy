@@ -543,6 +543,7 @@ html{
 /*section05*/
 #section05{
   width: 100%;
+  min-height: 100vh;
   height: auto;
   background: #EDF5CF;
   position: relative;
