@@ -63,6 +63,8 @@ $(document).ready(function () {//시작
 
   // 문서 스크롤 시 섹션 중앙에 오면 섹션 4 영역 자동 스냅
   window.addEventListener('scroll', function () {
+    if (window.innerWidth <= 420) {
+    }
     if (isSnapped || isLeaving) return; // 이미 스냅되었거나 이탈 중이면 중단
     const rect = $section[0].getBoundingClientRect();
 
@@ -74,8 +76,6 @@ $(document).ready(function () {//시작
 
   // 휠 이벤트 제어
   window.addEventListener('wheel', function (e) {
-    if (window.innerWidth <= 420) {
-    }
 
 
     if (!isSnapped) return; // 스냅 상태 아닐 경우 무시
@@ -126,7 +126,7 @@ $(document).ready(function () {//시작
   });
 
 
-  
+
   $("#section06 .car").addClass("active");
   $(".car-site").show();
   $(".bicycle-site").hide();
