@@ -1,4 +1,5 @@
 $(document).ready(function(){//시작
+  AOS.init();
 
   //header
     $("header nav .gnb > li").mouseenter(function () {
@@ -30,11 +31,6 @@ $(document).ready(function(){//시작
     $(".mgnb-wrap").animate({ right: '-100%' });
   });
    
-
-
-
-
-
   //section04 효과
   const $section = $('#section04');   // section04 요소 선택 
   const headerHeight = 100;  // 상단 fixed header 높이값
@@ -229,6 +225,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-
 window.dispatchEvent(new Event('scroll'));
+
+
 });//끝

@@ -388,7 +388,7 @@ html{
   font-size: 3.5rem;
   opacity: 0;
   transform: translateY(-30px);
-  transition: all 0.5s linear;
+  transition: opacity 0.5s linear;
 }
 
 .swiper-slide-active .section04-txt{
@@ -803,7 +803,7 @@ html{
   padding: 36px 27px;
   margin-top: 95px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: color 0.3s;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1142,14 +1142,14 @@ html{
 }
 #partnership .partnership-btn{
   align-items: center;
-  transition: all 0.5s;
+  transition: color 0.5s;
   margin-top: 27px;
 }
 #partnership .partnership-btn a{
   font-size: 2.2rem;
   color: #9DC601;
   font-weight: 500;
-  transition: all 0.5s;
+  transition: color 0.5s;
   padding: 24px 33px;
   border-radius: 20px;
   background: #fff;
